@@ -1,14 +1,23 @@
 package com.germeny.pasqualesilvio;
 
+import android.Manifest;
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
+import com.blikoon.qrcodescanner.QrCodeActivity;
 import com.germeny.pasqualesilvio.model.AddGatewayResponse;
 import com.germeny.pasqualesilvio.model.BaseResponseList;
 import com.germeny.pasqualesilvio.model.ErrorResponse;
@@ -25,31 +34,103 @@ import retrofit2.Converter;
 import retrofit2.Response;
 
 public class RegisterDeviceActivity extends AppCompatActivity {
-    EditText edDeviceId, edDeviceName, edPassword, edType, edMax;
-    Button btnSubmit;
+    private static final int REQUEST_CODE_QR_SCAN = 101;
+    private static final int MY_CAMERA_REQUEST_CODE = 100;
+
+    private final String LOGTAG = "QRCScanner-MainActivity";
+
+    EditText edDeviceName;
+    Button btnScan;
+    boolean canClick = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.acitivity_device_register);
-        edDeviceId = findViewById(R.id.edDeviceId);
         edDeviceName = findViewById(R.id.edDeviceName);
-        edPassword = findViewById(R.id.edPassword);
-        edType = findViewById(R.id.edType);
-        edMax = findViewById(R.id.edMax);
-        btnSubmit = findViewById(R.id.btnSubmit);
+        btnScan = findViewById(R.id.btnScan);
 
-        btnSubmit.setOnClickListener(v->{
-            ProgressDialog pd = new ProgressDialog(this);
-            pd.setMessage("loading");
-            if(edDeviceId.getText() != null && edDeviceName.getText() != null && edPassword.getText() != null && edType.getText() != null && edMax.getText() != null){
+        edDeviceName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                canClick = !editable.toString().isEmpty();
+                btnScan.setEnabled(canClick);
+            }
+        });
+
+        btnScan.setOnClickListener(v->{
+            if(canClick){
+                if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                    requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_REQUEST_CODE);
+                }
+                else{
+                    Intent i = new Intent(RegisterDeviceActivity.this, QrCodeActivity.class);
+                    startActivityForResult( i,REQUEST_CODE_QR_SCAN);
+                }
+            }
+        });
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == MY_CAMERA_REQUEST_CODE) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Intent i = new Intent(RegisterDeviceActivity.this, QrCodeActivity.class);
+                startActivityForResult( i,REQUEST_CODE_QR_SCAN);
+            } else {
+                Toast.makeText(this, "camera permission denied", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode != Activity.RESULT_OK) {
+            Log.d(LOGTAG, "COULD NOT GET A GOOD RESULT.");
+            if (data == null)
+                return;
+            //Getting the passed result
+            String result = data.getStringExtra("com.blikoon.qrcodescanner.error_decoding_image");
+            if (result != null) {
+                AlertDialog alertDialog = new AlertDialog.Builder(RegisterDeviceActivity.this).create();
+                alertDialog.setTitle("Scan Error");
+                alertDialog.setMessage("QR Code could not be scanned");
+                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                        (dialog, which) -> dialog.dismiss());
+                alertDialog.show();
+            }
+            return;
+
+        }
+        if (requestCode == REQUEST_CODE_QR_SCAN) {
+            if (data == null)
+                return;
+            //Getting the passed result
+            String[] result = data.getStringExtra("com.blikoon.qrcodescanner.got_qr_scan_relult").split(" ");
+
+            if(result.length == 4){
+                ProgressDialog pd = new ProgressDialog(this);
+                pd.setMessage("loading");
                 RestService service = RetrofitInstance.getRetrofitInstance().create(RestService.class);
                 Call<BaseResponseList<AddGatewayResponse>> call = service.postGateway(
-                        edDeviceId.getText().toString(),
+                        result[0],
                         edDeviceName.getText().toString(),
-                        edPassword.getText().toString(),
-                        edType.getText().toString(),
-                        Integer.parseInt(edMax.getText().toString())
+                        result[1],
+                        result[2],
+                        Integer.parseInt(result[3])
                 );
                 pd.show();
 
@@ -60,11 +141,9 @@ public class RegisterDeviceActivity extends AppCompatActivity {
                         if (response.isSuccessful()) {
                             if (response.body().getCode() == 200) {
                                 Toast.makeText(RegisterDeviceActivity.this, "Success Add", Toast.LENGTH_SHORT).show();
-                                edDeviceId.setText("");
-                                edDeviceName.setText("");
-                                edPassword.setText("");
-                                edType.setText("");
-                                edMax.setText("");
+                                finishAffinity();
+                                Intent intent = new Intent(RegisterDeviceActivity.this, SystemActivity.class);
+                                startActivity(intent);
                             } else {
                                 Toast.makeText(RegisterDeviceActivity.this, "Failed " + response.body().getStatus() + " : " + response.body().getMessage(), Toast.LENGTH_SHORT).show();
                             }
@@ -87,6 +166,6 @@ public class RegisterDeviceActivity extends AppCompatActivity {
                     }
                 });
             }
-        });
+        }
     }
 }

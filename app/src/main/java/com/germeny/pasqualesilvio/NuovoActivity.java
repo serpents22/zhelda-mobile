@@ -19,8 +19,6 @@ import com.blikoon.qrcodescanner.QrCodeActivity;
 import com.germeny.pasqualesilvio.utils.TcpClient;
 
 public class NuovoActivity extends AppCompatActivity {
-    private static final int REQUEST_CODE_QR_SCAN = 101;
-    private final String LOGTAG = "QRCScanner-MainActivity";
 
     ImageView backbtn, scanBtn;
     Button saveBtn, btnRegisterDevice;
@@ -50,8 +48,7 @@ public class NuovoActivity extends AppCompatActivity {
         });
 
         scanBtn.setOnClickListener(v -> {
-            Intent i = new Intent(NuovoActivity.this,QrCodeActivity.class);
-            startActivityForResult( i,REQUEST_CODE_QR_SCAN);
+
         });
 
         saveBtn.setOnClickListener(v-> {
@@ -113,43 +110,6 @@ public class NuovoActivity extends AppCompatActivity {
             //response received from server
             Log.d("test", "response " + values[0]);
             //process server response here....
-        }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode != Activity.RESULT_OK) {
-            Log.d(LOGTAG, "COULD NOT GET A GOOD RESULT.");
-            if (data == null)
-                return;
-            //Getting the passed result
-            String result = data.getStringExtra("com.blikoon.qrcodescanner.error_decoding_image");
-            if (result != null) {
-                AlertDialog alertDialog = new AlertDialog.Builder(NuovoActivity.this).create();
-                alertDialog.setTitle("Scan Error");
-                alertDialog.setMessage("QR Code could not be scanned");
-                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                        (dialog, which) -> dialog.dismiss());
-                alertDialog.show();
-            }
-            return;
-
-        }
-        if (requestCode == REQUEST_CODE_QR_SCAN) {
-            if (data == null)
-                return;
-            //Getting the passed result
-            String result = data.getStringExtra("com.blikoon.qrcodescanner.got_qr_scan_relult");
-            Log.d(LOGTAG, "Have scan result in your app activity :" + result);
-            AlertDialog alertDialog = new AlertDialog.Builder(NuovoActivity.this).create();
-            alertDialog.setTitle("Scan result");
-            alertDialog.setMessage(result);
-            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                    (dialog, which) -> dialog.dismiss());
-            alertDialog.show();
-
         }
     }
 }

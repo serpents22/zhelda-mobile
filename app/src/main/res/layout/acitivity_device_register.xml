@@ -36,28 +36,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Impianto ID"
-                android:textColor="@color/black"
-                android:textSize="20dp"
-                android:layout_marginTop="60dp"
-                android:layout_marginLeft="20dp"/>
-
-            <EditText
-                android:id="@+id/edDeviceId"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginStart="20dp"
-                android:textSize="20dp"
-                android:layout_marginEnd="20dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="Impianto Nome"
                 android:textColor="@color/black"
                 android:textSize="20dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="60dp"
                 android:layout_marginLeft="20dp"/>
 
             <EditText
@@ -69,70 +51,17 @@
                 android:textSize="20dp"
                 android:layout_marginEnd="20dp"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Password"
-                android:textColor="@color/black"
-                android:textSize="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginLeft="20dp"/>
-
-            <EditText
-                android:id="@+id/edPassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginStart="20dp"
-                android:textSize="20dp"
-                android:layout_marginEnd="20dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Genere"
-                android:textColor="@color/black"
-                android:textSize="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginLeft="20dp"/>
-
-            <EditText
-                android:id="@+id/edType"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginStart="20dp"
-                android:textSize="20dp"
-                android:layout_marginEnd="20dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Massimo Dispostiviti"
-                android:textColor="@color/black"
-                android:textSize="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginLeft="20dp"/>
-
-            <EditText
-                android:id="@+id/edMax"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginStart="20dp"
-                android:textSize="20dp"
-                android:layout_marginEnd="20dp"/>
-
             <Button
-                android:id="@+id/btnSubmit"
+                android:id="@+id/btnScan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginEnd="24dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="82dp"
+                android:enabled="false"
                 android:layout_marginBottom="24dp"
-                android:text="registro"/>
+                android:text="SCAN QR"/>
         </androidx.appcompat.widget.LinearLayoutCompat>
     </ScrollView>
 </LinearLayout>
