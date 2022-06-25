@@ -13,12 +13,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.germeny.pasqualesilvio.adapter.SystemAdapter;
 import com.germeny.pasqualesilvio.model.SystemModel;
+import com.germeny.pasqualesilvio.utils.Preferences;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class SystemActivity extends AppCompatActivity {
-    private List<SystemModel> systemList = new ArrayList<>();
     private SystemAdapter SAdapter;
 
     Button okBtn, editBtn, cancelBtn, menuBtn;
@@ -54,21 +54,20 @@ public class SystemActivity extends AppCompatActivity {
         });
 
 
-        SAdapter = new SystemAdapter(systemList);
+        SAdapter = new SystemAdapter(new Preferences().getGateway());
         LinearLayoutManager HLayoutManager = new LinearLayoutManager(this);
         HLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         listview.setLayoutManager(HLayoutManager);
         listview.setItemAnimator(new DefaultItemAnimator());
         listview.setAdapter(SAdapter);
-        preparecardData();
     }
 
-    private void preparecardData() {
-        SystemModel movie = new SystemModel("Casa", R.drawable.checkicon);
-        systemList.add(movie);
-        SystemModel movie1 = new SystemModel("Ufficio", R.drawable.warningicon);
-        systemList.add(movie1);
-        SystemModel movie2 = new SystemModel("Casa montagna", R.drawable.cancelicon);
-        systemList.add(movie2);
-    }
+//    private void preparecardData() {
+//        SystemModel movie = new SystemModel("Casa", R.drawable.checkicon);
+//        systemList.add(movie);
+//        SystemModel movie1 = new SystemModel("Ufficio", R.drawable.warningicon);
+//        systemList.add(movie1);
+//        SystemModel movie2 = new SystemModel("Casa montagna", R.drawable.cancelicon);
+//        systemList.add(movie2);
+//    }
 }
