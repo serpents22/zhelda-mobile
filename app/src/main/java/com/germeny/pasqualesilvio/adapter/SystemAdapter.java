@@ -2,6 +2,8 @@ package com.germeny.pasqualesilvio.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -76,6 +78,7 @@ public class SystemAdapter extends RecyclerView.Adapter<SystemAdapter.MyViewHold
         GatewaysDataItem model = cardList.get(position);
         holder.imageTitle.setImageResource(R.drawable.warningicon);
         holder.name.setText(model.getDeviceName());
+
         updateData(model.getDeviceId(), holder);
 
         holder.settingBtn.setOnClickListener(v -> {
@@ -125,6 +128,11 @@ public class SystemAdapter extends RecyclerView.Adapter<SystemAdapter.MyViewHold
                 Toast.makeText(context, "May be network error", Toast.LENGTH_SHORT).show();
             }
         });
+
+        Handler handler = new Handler(Looper.getMainLooper());
+        handler.postDelayed(() -> {
+            updateData(deviceId, holder);
+        }, 3000);
     }
 
     @Override

@@ -35,6 +35,8 @@
         <entry key="..\:/development/PasqualeSilvio/app/src/main/res/layout/listitem_system.xml" value="0.25" />
         <entry key="app/src/main/res/layout/acitivity_device_register.xml" value="0.14010416666666667" />
         <entry key="app/src/main/res/layout/acitivity_nuovo.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_detail.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_indivi.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.165" />
       </map>

@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
                         pd.hide();
                         if (response.isSuccessful()) {
                             if (response.body().getCode() == 200) {
+                                Toast.makeText(MainActivity.this, response.body().getData().getToken().getToken(), Toast.LENGTH_SHORT).show();
                                 new Preferences().setToken(response.body().getData().getToken().getToken(), MainActivity.this);
                                 new Preferences().setGateway(response.body().getData().getGatewaysData());
 

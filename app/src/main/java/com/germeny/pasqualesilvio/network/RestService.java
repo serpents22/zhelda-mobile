@@ -43,7 +43,7 @@ public interface RestService {
             @Field("max_devices") int max_devices
     );
 
-    @GET("/gateway/{device_id}")
+    @GET("/gateway/dev-stat/{device_id}")
     Call<BaseResponseList<DevStatResponse>> getDeviceStat(
             @Path("device_id") String device_id
     );

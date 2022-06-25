@@ -92,9 +92,46 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/indiviListview"
         android:layout_width="match_parent"
-        android:layout_height="320dp"
-        android:layout_alignParentStart="true"
+        android:layout_height="wrap_content"
         android:layout_marginTop="20dp"/>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp">
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+            <ImageView
+                android:id="@+id/btnDay"
+                android:layout_width="128dp"
+                android:layout_height="128dp"
+                android:src="@drawable/ic_day"/>
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/swDay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+            <ImageView
+                android:id="@+id/btnNight"
+                android:layout_width="128dp"
+                android:layout_height="128dp"
+                android:src="@drawable/ic_night"/>
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/swNight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
     <LinearLayout
         android:layout_width="match_parent"

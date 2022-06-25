@@ -27,4 +27,15 @@ public class Preferences {
     public void setGateway(List<GatewaysDataItem> gateway) {
         Hawk.put("gateway_data", gateway);
     }
+
+    public Boolean getSystemActivityActive(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("Token", Context.MODE_PRIVATE);
+        return sharedPreferences.getBoolean("getSystemActivityActive", false);
+    }
+
+    public void setSystemActivityActive(Boolean log, Context context) {
+        SharedPreferences.Editor editor = context.getSharedPreferences("Token", Context.MODE_PRIVATE).edit();
+        editor.putBoolean("getSystemActivityActive", log);
+        editor.apply();
+    }
 }

@@ -62,7 +62,19 @@ public class SystemActivity extends AppCompatActivity {
         listview.setAdapter(SAdapter);
     }
 
-//    private void preparecardData() {
+    @Override
+    protected void onResume() {
+        super.onResume();
+        new Preferences().setSystemActivityActive(true, this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        new Preferences().setSystemActivityActive(false, this);
+    }
+
+    //    private void preparecardData() {
 //        SystemModel movie = new SystemModel("Casa", R.drawable.checkicon);
 //        systemList.add(movie);
 //        SystemModel movie1 = new SystemModel("Ufficio", R.drawable.warningicon);
