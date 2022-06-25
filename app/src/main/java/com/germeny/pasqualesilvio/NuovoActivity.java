@@ -63,15 +63,15 @@ public class NuovoActivity extends AppCompatActivity {
                 public void run() {
                     if (mTcpClient != null) {
 
-                        mTcpClient.sendMessage("$SSID:" + edSSID.getText().toString() + "," + edPassword.getText().toString());
+                        mTcpClient.sendMessage("$SSID=" + edSSID.getText().toString() + "," + edPassword.getText().toString() + "\r\n") ;
 
                         Handler handler = new Handler(Looper.getMainLooper());
                         handler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                mTcpClient.sendMessage("$REBOOT");
+                                mTcpClient.sendMessage("$REBOOT" + "\r\n");
                             }
-                        }, 5000);
+                        }, 10000);
                     }
                 }
             }, 2000);
@@ -100,10 +100,10 @@ public class NuovoActivity extends AppCompatActivity {
             mTcpClient = new TcpClient(this::publishProgress);
             mTcpClient.run();
 
-            mTcpClient.sendMessage("$SSID:" + edSSID.getText().toString() + "," + edPassword.getText().toString() + "");
+            mTcpClient.sendMessage("$SSID=" + edSSID.getText().toString() + "," + edPassword.getText().toString() + "\r\n");
 
             Handler handler = new Handler(Looper.getMainLooper());
-            handler.postDelayed(() -> mTcpClient.sendMessage("$REBOOT"), 5000);
+            handler.postDelayed(() -> mTcpClient.sendMessage("$REBOOT"+ "\r\n"), 10000);
             return null;
         }
 
