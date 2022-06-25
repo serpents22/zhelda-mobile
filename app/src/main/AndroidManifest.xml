@@ -39,6 +39,7 @@
         <activity android:name=".WhatsappActivity"/>
         <activity android:name=".NuovoActivity"/>
         <activity android:name=".RegisterDeviceActivity"/>
+        <activity android:name=".SetupDayNightActivity"/>
     </application>
 
 </manifest>

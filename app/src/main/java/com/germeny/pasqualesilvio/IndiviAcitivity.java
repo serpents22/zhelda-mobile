@@ -25,10 +25,10 @@ import java.util.List;
 public class IndiviAcitivity extends AppCompatActivity {
     SwitchMaterial indiviSwitch;
     Button menuBtn, indiviSettingBtn;
-    ImageView backBtn, stateimage;
+    ImageView backBtn, stateimage, btnDay, btnNight;
     RecyclerView indiviListview;
 
-    private List<IndiviModel> IndiviList = new ArrayList<>();
+    private final List<IndiviModel> IndiviList = new ArrayList<>();
     private IndiviAdapter IAdapter;
 
     @Override
@@ -38,21 +38,20 @@ public class IndiviAcitivity extends AppCompatActivity {
 
         getSupportActionBar().hide();
 
-        indiviListview = (RecyclerView) findViewById(R.id.indiviListview);
-        menuBtn = (Button) findViewById(R.id.indiviMenu);
-        indiviSettingBtn = (Button) findViewById(R.id.indivisettingBtn);
-        backBtn = (ImageView) findViewById(R.id.indiviBackBtn);
-        indiviSwitch = (SwitchMaterial) findViewById(R.id.indiviSwitch);
-        stateimage = (ImageView)findViewById(R.id.indiviFire);
+        indiviListview = findViewById(R.id.indiviListview);
+        menuBtn = findViewById(R.id.indiviMenu);
+        indiviSettingBtn = findViewById(R.id.indivisettingBtn);
+        backBtn = findViewById(R.id.indiviBackBtn);
+        indiviSwitch = findViewById(R.id.indiviSwitch);
+        stateimage = findViewById(R.id.indiviFire);
+        btnDay = findViewById(R.id.btnDay);
+        btnNight = findViewById(R.id.btnNight);
 
-        indiviSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
-                    stateimage.setImageResource(R.drawable.fireimage);
-                }else {
-                    stateimage.setImageResource(R.drawable.snow);
-                }
+        indiviSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if(isChecked){
+                stateimage.setImageResource(R.drawable.fireimage);
+            }else {
+                stateimage.setImageResource(R.drawable.snow);
             }
         });
 
@@ -64,14 +63,26 @@ public class IndiviAcitivity extends AppCompatActivity {
         indiviListview.setAdapter(IAdapter);
         preparecardData();
 
-        backBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(IndiviAcitivity.this, SystemActivity.class);
-                startActivity(i);
-            }
+        backBtn.setOnClickListener(v -> {
+            Intent i = new Intent(IndiviAcitivity.this, SystemActivity.class);
+            startActivity(i);
         });
 
+        btnDay.setOnClickListener(v-> {
+            startActivity(
+                    new Intent(IndiviAcitivity.this, SetupDayNightActivity.class)
+                            .putExtra("device_id", getIntent().getStringExtra("device_id"))
+                            .putExtra("type", "A")
+            );
+        });
+
+        btnNight.setOnClickListener(v-> {
+            startActivity(
+                    new Intent(IndiviAcitivity.this, SetupDayNightActivity.class)
+                            .putExtra("device_id", getIntent().getStringExtra("device_id"))
+                            .putExtra("type", "B")
+            );
+        });
     }
 
     private void preparecardData() {

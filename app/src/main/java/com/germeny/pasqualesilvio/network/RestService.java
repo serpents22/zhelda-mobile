@@ -3,6 +3,7 @@ package com.germeny.pasqualesilvio.network;
 import com.germeny.pasqualesilvio.model.AddGatewayResponse;
 import com.germeny.pasqualesilvio.model.BaseResponse;
 import com.germeny.pasqualesilvio.model.BaseResponseList;
+import com.germeny.pasqualesilvio.model.DayNightResponse;
 import com.germeny.pasqualesilvio.model.DevStatResponse;
 import com.germeny.pasqualesilvio.model.LoginResponse;
 import com.germeny.pasqualesilvio.model.SuccessResponse;
@@ -46,6 +47,12 @@ public interface RestService {
     @GET("/gateway/dev-stat/{device_id}")
     Call<BaseResponseList<DevStatResponse>> getDeviceStat(
             @Path("device_id") String device_id
+    );
+
+    @GET("/gateway/dev-chrone/{device_id}/{type}")
+    Call<BaseResponseList<DayNightResponse>> getSetupDayNight(
+            @Path("device_id") String device_id,
+            @Path("type") String type
     );
 
 }
