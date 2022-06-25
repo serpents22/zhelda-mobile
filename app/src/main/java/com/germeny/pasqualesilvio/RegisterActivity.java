@@ -71,7 +71,7 @@ public class RegisterActivity extends AppCompatActivity {
                 call.enqueue(new Callback<BaseResponse>() {
                     @Override
                     public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
-                        pd.hide();
+                        pd.dismiss();
                         if (response.isSuccessful()) {
                             if (response.body().getCode() == 200) {
                                 Intent i = new Intent(RegisterActivity.this, MainActivity.class);
@@ -93,7 +93,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<BaseResponse> call, Throwable t) {
-                        pd.hide();
+                        pd.dismiss();
                         Toast.makeText(RegisterActivity.this, "May be network error", Toast.LENGTH_SHORT).show();
                     }
                 });

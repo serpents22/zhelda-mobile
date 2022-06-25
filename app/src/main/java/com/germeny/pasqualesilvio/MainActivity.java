@@ -59,10 +59,9 @@ public class MainActivity extends AppCompatActivity {
                 call.enqueue(new Callback<BaseResponse<LoginResponse>>() {
                     @Override
                     public void onResponse(Call<BaseResponse<LoginResponse>> call, Response<BaseResponse<LoginResponse>> response) {
-                        pd.hide();
+                        pd.dismiss();
                         if (response.isSuccessful()) {
                             if (response.body().getCode() == 200) {
-                                Toast.makeText(MainActivity.this, response.body().getData().getToken().getToken(), Toast.LENGTH_SHORT).show();
                                 new Preferences().setToken(response.body().getData().getToken().getToken(), MainActivity.this);
                                 new Preferences().setGateway(response.body().getData().getGatewaysData());
 
@@ -85,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<BaseResponse<LoginResponse>> call, Throwable t) {
-                        pd.hide();
+                        pd.dismiss();
                         Toast.makeText(MainActivity.this, "May be network error", Toast.LENGTH_SHORT).show();
                     }
                 });

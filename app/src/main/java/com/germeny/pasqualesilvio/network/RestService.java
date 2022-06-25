@@ -55,4 +55,11 @@ public interface RestService {
             @Path("type") String type
     );
 
+    @FormUrlEncoded
+    @POST("/datacontrol")
+    Call<BaseResponse> postSetupDayNight(
+            @Field("device_id") String device_id,
+            @Field("message") String message
+    );
+
 }

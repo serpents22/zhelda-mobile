@@ -56,7 +56,7 @@ public class RegisterDeviceActivity extends AppCompatActivity {
                 call.enqueue(new Callback<BaseResponseList<AddGatewayResponse>>() {
                     @Override
                     public void onResponse(Call<BaseResponseList<AddGatewayResponse>> call, Response<BaseResponseList<AddGatewayResponse>> response) {
-                        pd.hide();
+                        pd.dismiss();
                         if (response.isSuccessful()) {
                             if (response.body().getCode() == 200) {
                                 Toast.makeText(RegisterDeviceActivity.this, "Success Add", Toast.LENGTH_SHORT).show();
@@ -82,7 +82,7 @@ public class RegisterDeviceActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<BaseResponseList<AddGatewayResponse>> call, Throwable t) {
-                        pd.hide();
+                        pd.dismiss();
                         Toast.makeText(RegisterDeviceActivity.this, "May be network error", Toast.LENGTH_SHORT).show();
                     }
                 });

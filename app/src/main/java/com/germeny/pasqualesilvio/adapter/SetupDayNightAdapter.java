@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Looper;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,6 +77,40 @@ public class SetupDayNightAdapter extends RecyclerView.Adapter<SetupDayNightAdap
         } else {
             holder.edStop.setText(model.getStop());
         }
+
+        holder.edStart.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                model.setStart(holder.edStart.getText().toString());
+            }
+        });
+
+        holder.edStop.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                model.setStop(holder.edStop.getText().toString());
+            }
+        });
 
         holder.cbMonday.setChecked(
                 model.getWeekMask().substring(0,1).equals("1")
