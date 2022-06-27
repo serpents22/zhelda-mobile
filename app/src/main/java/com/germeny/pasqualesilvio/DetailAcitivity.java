@@ -168,6 +168,16 @@ public class DetailAcitivity extends AppCompatActivity {
         CheckBox cbDay = findViewById(R.id.cbDay);
         CheckBox cbNight =findViewById(R.id.cbNight);
 
+        char[] myNameChars = data.getIndiviDataSetResponse().getGroupMask().toCharArray();
+
+        if(myNameChars.length > 0){
+            cbDay.setChecked(myNameChars[0] == '1');
+        }
+
+        if(myNameChars.length > 1){
+            cbNight.setChecked(myNameChars[1] == '1');
+        }
+
         cbDay.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (cbNight.isChecked() && cbDay.isChecked()) {
                 cbNight.setChecked(false);
