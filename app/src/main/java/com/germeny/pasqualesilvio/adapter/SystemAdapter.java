@@ -100,7 +100,12 @@ public class SystemAdapter extends RecyclerView.Adapter<SystemAdapter.MyViewHold
                                 holder.imageTitle.setImageResource(R.drawable.cancelicon);
                             }
                             else {
-                                holder.imageTitle.setImageResource(R.drawable.checkicon);
+                                if(response.body().getData().get(0).getIsConnected().equals("ON")){
+                                    holder.imageTitle.setImageResource(R.drawable.checkicon);
+                                }
+                                else{
+                                    holder.imageTitle.setImageResource(R.drawable.ic_warning);
+                                }
                             }
                         }
                         else {

@@ -22,6 +22,9 @@ public class DevStatResponse{
 	@SerializedName("chrono1_stat")
 	private int chrono1Stat;
 
+	@SerializedName("is_connected")
+	private String isConnected;
+
 	@SerializedName("id")
 	private int id;
 
@@ -51,5 +54,9 @@ public class DevStatResponse{
 
 	public int getId(){
 		return id;
+	}
+
+	public String getIsConnected() {
+		return isConnected;
 	}
 }
