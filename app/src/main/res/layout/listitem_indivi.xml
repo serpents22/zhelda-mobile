@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/edittextbackground"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/indiviname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:textColor="@color/black"
+            android:layout_marginTop="3dp"
+            android:text="Salone"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/indiviNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="-"
+                android:textSize="20dp"
+                android:textColor="@color/black"
+                android:layout_marginLeft="5dp"/>
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="3dp"
+                android:src="@drawable/thermometer" />
+
+            <TextView
+                android:id="@+id/indivithermber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="-"
+                android:textSize="20dp"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="°C"
+                android:textColor="@color/black"
+                android:textSize="20dp"/>
+
+            <ImageView
+                android:id="@+id/imgAlarm"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:padding="3dp" />
+
+            <ImageView
+                android:id="@+id/imgFan"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:padding="3dp"
+                android:src="@drawable/ic_fan"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/imgDay"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:padding="3dp"
+                android:src="@drawable/ic_night"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/imgHand"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_hand"
+                android:visibility="gone" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/indiviItemBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="gestisci"
+                android:backgroundTint="@color/systemBorder"
+                android:layout_marginTop="-3dp"
+                android:layout_marginRight="10dp"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="I MIEI IMPIANTI"
+            android:textAlignment="center"
+            android:textSize="20dp"/>
+
+        <Button
+            android:id="@+id/systemMenu"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/ic_menu_icon"/>
+    </LinearLayout>
+
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/systemListview"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="20dp"/>
+
+    <Button
+        android:id="@+id/systemnuovobtn"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="nuovo impianto"
+        android:backgroundTint="@color/systemBorder"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"/>
+
+    <Button
+        android:id="@+id/systemeditbtn"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="importa impianto"
+        android:backgroundTint="@color/systemBorder"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="20dp"/>
+
+    <Button
+        android:id="@+id/systemcancelbtn"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="cancella impianto"
+        android:backgroundTint="@color/systemBorder"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="20dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:gravity="left|bottom"
+        android:orientation="vertical" >
+
+        <ImageView
+            android:id="@+id/systemBackBtn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/backbtn"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="20dp"/>
+    </LinearLayout>
+
+</LinearLayout>

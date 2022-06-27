@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_marginTop="12dp">
+        <ImageView
+            android:id="@+id/nuovoBackBtn"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/backbtn"
+            android:layout_marginLeft="20dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="REGISTRAZIONE IMPIANTO"
+            android:textSize="22dp"
+            android:textColor="@color/black"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"/>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Impianto Nome"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:layout_marginTop="60dp"
+                android:layout_marginLeft="20dp"/>
+
+            <EditText
+                android:id="@+id/edDeviceName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="20dp"
+                android:textSize="20dp"
+                android:layout_marginEnd="20dp"/>
+
+            <Button
+                android:id="@+id/btnScan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="82dp"
+                android:enabled="false"
+                android:layout_marginBottom="24dp"
+                android:text="SCAN QR"/>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </ScrollView>
+</LinearLayout>
