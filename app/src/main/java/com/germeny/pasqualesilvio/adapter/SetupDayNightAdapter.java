@@ -1,11 +1,13 @@
 package com.germeny.pasqualesilvio.adapter;
 
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Looper;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +16,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -23,6 +26,7 @@ import com.germeny.pasqualesilvio.R;
 import com.germeny.pasqualesilvio.model.DayNightResponse;
 import com.vicmikhailau.maskededittext.MaskedEditText;
 
+import java.util.Calendar;
 import java.util.List;
 
 public class SetupDayNightAdapter extends RecyclerView.Adapter<SetupDayNightAdapter.MyViewHolder> {
@@ -37,7 +41,7 @@ public class SetupDayNightAdapter extends RecyclerView.Adapter<SetupDayNightAdap
 
     class MyViewHolder extends RecyclerView.ViewHolder {
 //        ImageView imageTitle;
-        MaskedEditText edStart, edStop;
+        TextView edStart, edStop;
         CheckBox cbMonday, cbTuesday, cbWednesday, cbThursday, cbFriday, cbSaturday, cbSunday;
         MyViewHolder(View view) {
             super(view);
@@ -72,45 +76,19 @@ public class SetupDayNightAdapter extends RecyclerView.Adapter<SetupDayNightAdap
             holder.edStart.setText(model.getStart());
         }
 
+        holder.edStart.setOnClickListener(v->{
+            showTimeDialog(holder.edStart, model, true);
+        });
+
+        holder.edStop.setOnClickListener(v->{
+            showTimeDialog(holder.edStop, model, false);
+        });
+
         if(model.getStop().length() > 5){
             holder.edStop.setText(model.getStop().substring(0,5));
         } else {
             holder.edStop.setText(model.getStop());
         }
-
-        holder.edStart.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                model.setStart(holder.edStart.getText().toString());
-            }
-        });
-
-        holder.edStop.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                model.setStop(holder.edStop.getText().toString());
-            }
-        });
 
         holder.cbMonday.setChecked(
                 model.getWeekMask().substring(0,1).equals("1")
@@ -217,6 +195,32 @@ public class SetupDayNightAdapter extends RecyclerView.Adapter<SetupDayNightAdap
             }
             model.setWeekMask(String.valueOf(myNameChars));
         });
+    }
+
+    private void showTimeDialog(TextView tv, DayNightResponse model, boolean isStart) {
+
+        /**
+         * Calendar untuk mendapatkan waktu saat ini
+         */
+        Calendar calendar = Calendar.getInstance();
+
+        /**
+         * Initialize TimePicker Dialog
+         */
+        TimePickerDialog timePickerDialog = new TimePickerDialog(context, (TimePickerDialog.OnTimeSetListener) (view, hourOfDay, minute) -> {
+            tv.setText(hourOfDay+":"+minute);
+
+            if(isStart){
+                model.setStart(hourOfDay+":"+minute);
+            }
+            else{
+                model.setStop(hourOfDay+":"+minute);
+            }
+        },
+                calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE),
+                DateFormat.is24HourFormat(context));
+
+        timePickerDialog.show();
     }
 
     @Override

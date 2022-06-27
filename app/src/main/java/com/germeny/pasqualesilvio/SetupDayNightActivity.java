@@ -110,7 +110,7 @@ public class SetupDayNightActivity extends AppCompatActivity {
                 }
             }
 
-            Call<BaseResponse> call2 = service.postSetupDayNight(getIntent().getStringExtra("device_id"), sendData);
+            Call<BaseResponse> call2 = service.postDataControl(getIntent().getStringExtra("device_id"), sendData);
             call2.enqueue(new Callback<BaseResponse>() {
                 @Override
                 public void onResponse(Call<BaseResponse> call2, Response<BaseResponse> response) {

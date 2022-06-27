@@ -5,8 +5,12 @@ import com.germeny.pasqualesilvio.model.BaseResponse;
 import com.germeny.pasqualesilvio.model.BaseResponseList;
 import com.germeny.pasqualesilvio.model.DayNightResponse;
 import com.germeny.pasqualesilvio.model.DevStatResponse;
+import com.germeny.pasqualesilvio.model.IndiviDataDevStatResponse;
+import com.germeny.pasqualesilvio.model.IndiviDataListResponse;
+import com.germeny.pasqualesilvio.model.IndiviDataResponse;
+import com.germeny.pasqualesilvio.model.IndiviDataSetResponse;
+import com.germeny.pasqualesilvio.model.IndiviDataStatResponse;
 import com.germeny.pasqualesilvio.model.LoginResponse;
-import com.germeny.pasqualesilvio.model.SuccessResponse;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -57,9 +61,42 @@ public interface RestService {
 
     @FormUrlEncoded
     @POST("/datacontrol")
-    Call<BaseResponse> postSetupDayNight(
+    Call<BaseResponse> postDataControl(
             @Field("device_id") String device_id,
             @Field("message") String message
+    );
+
+    @GET("/gateway/dev-config/{device_id}")
+    Call<BaseResponseList<IndiviDataResponse>> getIndiviData(
+            @Path("device_id") String device_id
+    );
+
+    @GET("/gateway/th-info/{device_id}")
+    Call<BaseResponseList<IndiviDataListResponse>> getIndiviDataList(
+            @Path("device_id") String device_id
+    );
+
+    @GET("/gateway/th-stat/{device_id}")
+    Call<BaseResponseList<IndiviDataStatResponse>> getIndiviDataStatList(
+            @Path("device_id") String device_id
+    );
+
+    @GET("/gateway/th-set/{device_id}")
+    Call<BaseResponseList<IndiviDataSetResponse>> getIndiviDataSetList(
+            @Path("device_id") String device_id
+    );
+
+    @GET("/gateway/dev-stat/{device_id}")
+    Call<BaseResponseList<IndiviDataDevStatResponse>> getIndiviDataDevStatList(
+            @Path("device_id") String device_id
+    );
+
+    @FormUrlEncoded
+    @POST("/gateway/th-info/{device_id}")
+    Call<BaseResponse> postInvidiName(
+            @Path("device_id") String device_id,
+            @Field("tag_name") String tag_name,
+            @Field("th_name") String th_name
     );
 
 }

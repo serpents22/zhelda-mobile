@@ -26,13 +26,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
 
             <TextView
                 android:id="@+id/indiviNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1"
+                android:text="-"
                 android:textSize="20dp"
                 android:textColor="@color/black"
                 android:layout_marginLeft="5dp"/>
@@ -47,7 +48,7 @@
                 android:id="@+id/indivithermber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="22.3"
+                android:text="-"
                 android:textSize="20dp"
                 android:textColor="@color/black"/>
 
@@ -59,17 +60,33 @@
                 android:textSize="20dp"/>
 
             <ImageView
-                android:id="@+id/individevice"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:padding="3dp"
-                android:src="@drawable/fanimg"/>
+                android:id="@+id/imgAlarm"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:padding="3dp"/>
 
             <ImageView
-                android:id="@+id/indivimethod"
-                android:layout_width="35dp"
-                android:layout_height="40dp"
-                android:src="@drawable/clockimg"/>
+                android:id="@+id/imgFan"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:padding="3dp"
+                android:src="@drawable/ic_fan"
+                android:visibility="gone"/>
+
+            <ImageView
+                android:id="@+id/imgDay"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:visibility="gone"
+                android:src="@drawable/ic_night"
+                android:padding="3dp"/>
+
+            <ImageView
+                android:id="@+id/imgHand"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_hand"
+                android:visibility="gone"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -78,7 +95,7 @@
 
             <Button
                 android:id="@+id/indiviItemBtn"
-                android:layout_width="120dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="gestisci"
                 android:backgroundTint="@color/systemBorder"

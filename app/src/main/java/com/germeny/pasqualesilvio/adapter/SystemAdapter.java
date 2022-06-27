@@ -84,6 +84,8 @@ public class SystemAdapter extends RecyclerView.Adapter<SystemAdapter.MyViewHold
         holder.settingBtn.setOnClickListener(v -> {
             final Intent intent = new Intent(context, IndiviAcitivity.class);
             intent.putExtra("device_id", model.getDeviceId());
+            intent.putExtra("title", model.getDeviceName());
+
             context.startActivity(intent);
         });
     }
@@ -132,7 +134,7 @@ public class SystemAdapter extends RecyclerView.Adapter<SystemAdapter.MyViewHold
 
         Handler handler = new Handler(Looper.getMainLooper());
         handler.postDelayed(() -> {
-//            updateData(deviceId, holder);
+            updateData(deviceId, holder);
         }, 3000);
     }
 

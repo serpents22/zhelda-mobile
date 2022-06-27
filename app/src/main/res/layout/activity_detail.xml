@@ -152,45 +152,6 @@
         android:textSize="14sp"
         app:on="false" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-        <Button
-            android:id="@+id/detailzone1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
-            android:backgroundTint="@color/systemBorder"
-            android:textColor="@color/qr_code_flash_light_text_color"
-            android:enabled="false"
-            android:text="Zone1"/>
-        <Button
-            android:backgroundTint="@color/systemBorder"
-            android:layout_marginLeft="20dp"
-            android:id="@+id/detailzone2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Zone2"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/detailplanbtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Cronotermontato"
-        android:backgroundTint="@color/systemBorder"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"/>
-
     <Button
         android:id="@+id/detailsanebtn"
         android:layout_width="wrap_content"
@@ -199,6 +160,50 @@
         android:backgroundTint="@color/systemBorder"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"/>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp">
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+            <CheckBox
+                android:id="@+id/cbDay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="0dp"
+                android:minHeight="0dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18dp"
+                android:text="ZONA GIORNO"
+                android:textColor="@color/black"/>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+            <CheckBox
+                android:id="@+id/cbNight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="0dp"
+                android:minHeight="0dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18dp"
+                android:text="ZONA NOTTE"
+                android:textColor="@color/black"/>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
     <LinearLayout
         android:layout_width="match_parent"

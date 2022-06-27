@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -53,13 +54,17 @@ public class SystemActivity extends AppCompatActivity {
             }
         });
 
-
-        SAdapter = new SystemAdapter(new Preferences().getGateway());
-        LinearLayoutManager HLayoutManager = new LinearLayoutManager(this);
-        HLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        listview.setLayoutManager(HLayoutManager);
-        listview.setItemAnimator(new DefaultItemAnimator());
-        listview.setAdapter(SAdapter);
+        if(new Preferences().getGateway() == null || new Preferences().getGateway().isEmpty()){
+            Toast.makeText(this, "Gateway Empty", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            SAdapter = new SystemAdapter(new Preferences().getGateway());
+            LinearLayoutManager HLayoutManager = new LinearLayoutManager(this);
+            HLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+            listview.setLayoutManager(HLayoutManager);
+            listview.setItemAnimator(new DefaultItemAnimator());
+            listview.setAdapter(SAdapter);
+        }
     }
 
     @Override
