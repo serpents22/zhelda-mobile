@@ -243,13 +243,11 @@ public class IndiviAcitivity extends AppCompatActivity {
                     if (response.body().getCode() == 200) {
                         if(!response.body().getData().isEmpty()){
                             indiviDataListResponse = response.body().getData();
-
                             for(int i=0; i< indiviDataListResponse.size();i++) {
                                 if(indiviDataListResponse.get(i).getDeviceModel().equals("NONE")){
                                     indiviDataListResponse.remove(i);
                                 }
                             }
-
                             getDataStat();
                         }
                         else {
@@ -329,7 +327,6 @@ public class IndiviAcitivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     if (response.body().getCode() == 200) {
                         indiviDataSetResponses = response.body().getData();
-
                         getDataDev();
                     } else {
                         Toast.makeText(IndiviAcitivity.this, "Failed " + response.body().getStatus() + " : " + response.body().getMessage(), Toast.LENGTH_SHORT).show();
