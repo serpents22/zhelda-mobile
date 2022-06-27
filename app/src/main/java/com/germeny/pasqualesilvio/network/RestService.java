@@ -2,6 +2,7 @@ package com.germeny.pasqualesilvio.network;
 
 import com.germeny.pasqualesilvio.model.AddGatewayResponse;
 import com.germeny.pasqualesilvio.model.BaseResponse;
+import com.germeny.pasqualesilvio.model.BaseResponseDevConfig;
 import com.germeny.pasqualesilvio.model.BaseResponseList;
 import com.germeny.pasqualesilvio.model.DayNightResponse;
 import com.germeny.pasqualesilvio.model.DevStatResponse;
@@ -67,7 +68,7 @@ public interface RestService {
     );
 
     @GET("/gateway/dev-config/{device_id}")
-    Call<BaseResponseList<IndiviDataResponse>> getIndiviData(
+    Call<BaseResponseDevConfig<IndiviDataResponse>> getIndiviData(
             @Path("device_id") String device_id
     );
 

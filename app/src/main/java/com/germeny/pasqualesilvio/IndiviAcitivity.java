@@ -15,13 +15,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.germeny.pasqualesilvio.adapter.IndiviAdapter;
 import com.germeny.pasqualesilvio.model.BaseResponse;
+import com.germeny.pasqualesilvio.model.BaseResponseDevConfig;
 import com.germeny.pasqualesilvio.model.BaseResponseList;
+import com.germeny.pasqualesilvio.model.DevChronaResponse;
 import com.germeny.pasqualesilvio.model.IndiviDataDevStatResponse;
 import com.germeny.pasqualesilvio.model.IndiviDataListResponse;
 import com.germeny.pasqualesilvio.model.IndiviDataResponse;
@@ -54,7 +57,8 @@ public class IndiviAcitivity extends AppCompatActivity {
     List<IndiviDataSetResponse> indiviDataSetResponses;
     List<IndiviDataDevStatResponse> indiviDataDevStatResponses;
     ProgressDialog pd2;
-
+    SwitchCompat swDay, swNight;
+    DevChronaResponse dayData, nightData;
     private IndiviAdapter IAdapter;
 
     boolean realtimeData = false;
@@ -78,6 +82,9 @@ public class IndiviAcitivity extends AppCompatActivity {
         btnDay = findViewById(R.id.btnDay);
         btnNight = findViewById(R.id.btnNight);
         tvTitle = findViewById(R.id.tvTitle);
+
+        swDay = findViewById(R.id.swDay);
+        swNight = findViewById(R.id.swNight);
 
         tvTitle.setText(getIntent().getStringExtra("title"));
 
@@ -114,11 +121,11 @@ public class IndiviAcitivity extends AppCompatActivity {
         pd.show();
 
         RestService service = RetrofitInstance.getRetrofitInstance().create(RestService.class);
-        Call<BaseResponseList<IndiviDataResponse>> call = service.getIndiviData(getIntent().getStringExtra("device_id"));
+        Call<BaseResponseDevConfig<IndiviDataResponse>> call = service.getIndiviData(getIntent().getStringExtra("device_id"));
 
-        call.enqueue(new Callback<BaseResponseList<IndiviDataResponse>>() {
+        call.enqueue(new Callback<BaseResponseDevConfig<IndiviDataResponse>>() {
             @Override
-            public void onResponse(Call<BaseResponseList<IndiviDataResponse>> call, Response<BaseResponseList<IndiviDataResponse>> response) {
+            public void onResponse(Call<BaseResponseDevConfig<IndiviDataResponse>> call, Response<BaseResponseDevConfig<IndiviDataResponse>> response) {
                 if (response.isSuccessful()) {
                     if (response.body().getCode() == 200) {
                         if(!response.body().getData().isEmpty()){
@@ -129,6 +136,42 @@ public class IndiviAcitivity extends AppCompatActivity {
                             else {
                                 stateimage.setImageResource(R.drawable.snow);
                             }
+                        }
+
+                        if(!response.body().getChronaForceData().isEmpty()){
+                            for(int i = 0; i < response.body().getChronaForceData().size(); i++){
+                                if(response.body().getChronaForceData().get(i).getTagName().equals("CHRONAFORCE")){
+                                    dayData = response.body().getChronaForceData().get(i);
+                                    swDay.setChecked(dayData.getValue().equals("ON"));
+                                }
+
+                                if(response.body().getChronaForceData().get(i).getTagName().equals("CHRONBFORCE")){
+                                    nightData = response.body().getChronaForceData().get(i);
+                                    swNight.setChecked(nightData.getValue().equals("ON"));
+                                }
+                            }
+
+                            swDay.setOnCheckedChangeListener((compoundButton, b) -> {
+                                if(dayData != null){
+                                    if(b){
+                                        postDataChron("A","ON");
+                                    }
+                                    else{
+                                        postDataChron("A","OFF");
+                                    }
+                                }
+                            });
+
+                            swNight.setOnCheckedChangeListener((compoundButton, b) -> {
+                                if(nightData != null){
+                                    if(b){
+                                        postDataChron("B","ON");
+                                    }
+                                    else{
+                                        postDataChron("B","OFF");
+                                    }
+                                }
+                            });
                         }
                     } else {
                         Toast.makeText(IndiviAcitivity.this, "Failed " + response.body().getStatus() + " : " + response.body().getMessage(), Toast.LENGTH_SHORT).show();
@@ -147,7 +190,7 @@ public class IndiviAcitivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<BaseResponseList<IndiviDataResponse>> call, Throwable t) {
+            public void onFailure(Call<BaseResponseDevConfig<IndiviDataResponse>> call, Throwable t) {
                 Log.e("asdx", t.getMessage());
                 Toast.makeText(IndiviAcitivity.this, "May be network error 1", Toast.LENGTH_SHORT).show();
                 pd.dismiss();
@@ -209,7 +252,38 @@ public class IndiviAcitivity extends AppCompatActivity {
         });
 
         pd2.show();
+    }
 
+    private void postDataChron(String site, String ON){
+        RestService service = RetrofitInstance.getRetrofitInstance().create(RestService.class);
+        Call<BaseResponse> call2 = service.postDataControl(data.getDeviceId(), "CHRON" + site + "FORCE=" + ON);
+
+        call2.enqueue(new Callback<BaseResponse>() {
+            @Override
+            public void onResponse(Call<BaseResponse> call2, Response<BaseResponse> response) {
+                if (response.isSuccessful()) {
+                    if (response.body().getCode() == 200) {
+                        Toast.makeText(IndiviAcitivity.this, "Success Post Data", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(IndiviAcitivity.this, "Failed " + response.body().getStatus() + " : " + response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Converter<ResponseBody, ErrorResponse> converter = RetrofitInstance.getRetrofitInstance()
+                            .responseBodyConverter(ErrorResponse.class, new Annotation[0]);
+                    try {
+                        ErrorResponse error = converter.convert(response.errorBody());
+                        Toast.makeText(IndiviAcitivity.this, "Failed : " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                    } catch (IOException e) {
+                        Toast.makeText(IndiviAcitivity.this, "Failed : Object Response Is Inappropriate", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BaseResponse> call2, Throwable t) {
+                Toast.makeText(IndiviAcitivity.this, "May be network error", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
