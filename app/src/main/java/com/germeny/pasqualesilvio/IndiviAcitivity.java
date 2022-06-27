@@ -172,6 +172,8 @@ public class IndiviAcitivity extends AppCompatActivity {
                 }
                 sendData = String.valueOf(myNameChars);
 
+                Toast.makeText(this, sendData, Toast.LENGTH_SHORT).show();
+
                 Call<BaseResponse> call2 = service.postDataControl(getIntent().getStringExtra("device_id"), "DEVCONFIG=" + sendData);
 
                 call2.enqueue(new Callback<BaseResponse>() {

@@ -79,7 +79,7 @@ public class DetailAcitivity extends AppCompatActivity {
             nameTxt.setText("No Name");
         }
         else {
-            nameTxt.setText(data.getIndiviDataSetResponse().getTagName());
+            nameTxt.setText(data.getThName());
         }
 
         editbtn.setOnClickListener(v->{
