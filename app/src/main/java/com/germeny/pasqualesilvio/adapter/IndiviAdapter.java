@@ -42,7 +42,6 @@ public class IndiviAdapter extends RecyclerView.Adapter<IndiviAdapter.MyViewHold
             imgDay = view.findViewById(R.id.imgDay);
             imgHand = view.findViewById(R.id.imgHand);
             imgOnOff = view.findViewById(R.id.imgOnOff);
-
             number = view.findViewById(R.id.indiviNumber);
             temper = view.findViewById(R.id.indivithermber);
             name = view.findViewById(R.id.indiviname);

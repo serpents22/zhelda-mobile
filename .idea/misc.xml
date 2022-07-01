@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+<<<<<<< HEAD
         <entry key="..\:/Users/Fajar/Documents/zhelda-mobile-development/app/src/main/res/layout/activity_detail.xml" value="0.25" />
         <entry key="..\:/Users/Fajar/Documents/zhelda-mobile-development/app/src/main/res/layout/activity_indivi.xml" value="0.30117753623188404" />
         <entry key="..\:/Users/Fajar/Documents/zhelda-mobile-development/app/src/main/res/layout/activity_main.xml" value="0.22" />
@@ -14,6 +15,8 @@
         <entry key="..\:/Users/Fajar/Documents/zhelda-mobile-development/app/src/main/res/layout/item_setup_daynight.xml" value="0.30117753623188404" />
         <entry key="..\:/Users/Fajar/Documents/zhelda-mobile-development/app/src/main/res/layout/listitem_indivi.xml" value="0.25" />
         <entry key="..\:/Users/Fajar/Documents/zhelda-mobile-development/app/src/main/res/layout/listitem_system.xml" value="0.30117753623188404" />
+=======
+>>>>>>> 092372c9e65cb10422c17b1cdfce7f9d89fdf905
         <entry key="..\:/Users/denasatrio/AndroidStudioProjects/ZheldaApps/app/src/main/res/drawable/boder.xml" value="0.2265" />
         <entry key="..\:/Users/denasatrio/AndroidStudioProjects/ZheldaApps/app/src/main/res/drawable/custom_thumb.xml" value="0.2265" />
         <entry key="..\:/Users/denasatrio/AndroidStudioProjects/ZheldaApps/app/src/main/res/drawable/custom_track.xml" value="0.2265" />

@@ -294,9 +294,6 @@ public class IndiviAcitivity extends AppCompatActivity {
             }
         });
 
-
-
-
         indiviSwitch.setOnCheckedChangeListener((compoundButton, b) -> {
             if(data != null){
                 String isHeater = data.isIsHeater() ? "1" : "0";
@@ -580,7 +577,6 @@ public class IndiviAcitivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     if (response.body().getCode() == 200) {
                         indiviDataDevStatResponses = response.body().getData();
-
                         for(int i=0; i< indiviDataListResponse.size();i++) {
                             if(indiviDataListResponse.get(i).getDeviceModel().equals("NONE")){
                                 indiviDataListResponse.remove(indiviDataListResponse.get(i));
@@ -589,7 +585,6 @@ public class IndiviAcitivity extends AppCompatActivity {
                         }
 
                         for(int i=0; i< indiviDataListResponse.size();i++){
-
                             //append data stat
                             for(int a=0; a<indiviDataStatResponse.size(); a++){
                                 if(indiviDataStatResponse.get(a).getThInfo().equals(indiviDataListResponse.get(i).getTagName())){
