@@ -28,6 +28,17 @@ public class Preferences {
         Hawk.put("gateway_data", gateway);
     }
 
+    public Boolean getRememberMe(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("getRememberMe", Context.MODE_PRIVATE);
+        return sharedPreferences.getBoolean("getRememberMe", false);
+    }
+
+    public void setRememberMe(Boolean log, Context context) {
+        SharedPreferences.Editor editor = context.getSharedPreferences("getRememberMe", Context.MODE_PRIVATE).edit();
+        editor.putBoolean("getRememberMe", log);
+        editor.apply();
+    }
+
     public Boolean getSystemActivityActive(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences("Token", Context.MODE_PRIVATE);
         return sharedPreferences.getBoolean("getSystemActivityActive", false);

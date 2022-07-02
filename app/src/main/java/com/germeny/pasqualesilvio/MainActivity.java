@@ -8,6 +8,7 @@ import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -32,21 +33,24 @@ public class MainActivity extends AppCompatActivity {
     Button loginBtn, registerBtn;
     EditText email, password;
     ImageView helpbtn;
+    CheckBox checkbox;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        if(new Preferences().getRememberMe(this)){
+            startActivity(new Intent(this, SystemActivity.class));
+        }
+        else {
+            setContentView(R.layout.activity_main);
+            getSupportActionBar().hide();
+            email = (EditText)findViewById(R.id.emailEdit);
+            password = (EditText)findViewById(R.id.passwordEdit);
+            loginBtn = (Button) findViewById(R.id.loginBtn);
+            registerBtn = (Button) findViewById(R.id.registerBtn);
+            helpbtn = (ImageView)findViewById(R.id.heleclient);
+            checkbox = findViewById(R.id.checkbox);
 
-        getSupportActionBar().hide();
-        email = (EditText)findViewById(R.id.emailEdit);
-        password = (EditText)findViewById(R.id.passwordEdit);
-        loginBtn = (Button) findViewById(R.id.loginBtn);
-        registerBtn = (Button) findViewById(R.id.registerBtn);
-        helpbtn = (ImageView)findViewById(R.id.heleclient);
-
-        loginBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+            loginBtn.setOnClickListener(v -> {
                 ProgressDialog pd = new ProgressDialog(MainActivity.this);
                 pd.setMessage("loading");
 
@@ -64,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
                             if (response.body().getCode() == 200) {
                                 new Preferences().setToken(response.body().getData().getToken().getToken(), MainActivity.this);
                                 new Preferences().setGateway(response.body().getData().getGatewaysData());
+                                new Preferences().setRememberMe(checkbox.isChecked(), MainActivity.this);
 
                                 Intent intent = new Intent(MainActivity.this, SystemActivity.class);
                                 startActivity(intent);
@@ -88,23 +93,23 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "May be network error", Toast.LENGTH_SHORT).show();
                     }
                 });
-            }
-        });
+            });
 
-        registerBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
-                startActivity(intent);
-            }
-        });
+            registerBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+                    startActivity(intent);
+                }
+            });
 
-        helpbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, WhatsappActivity.class);
-                startActivity(i);
-            }
-        });
+            helpbtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(MainActivity.this, WhatsappActivity.class);
+                    startActivity(i);
+                }
+            });
+        }
     }
 }

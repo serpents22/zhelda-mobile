@@ -22,7 +22,7 @@ import java.util.List;
 public class SystemActivity extends AppCompatActivity {
     private SystemAdapter SAdapter;
 
-    Button okBtn, editBtn, cancelBtn, menuBtn;
+    Button okBtn, editBtn, cancelBtn, menuBtn, btnLogout;
     RecyclerView listview;
     ImageView backBtn;
     @Override
@@ -37,6 +37,13 @@ public class SystemActivity extends AppCompatActivity {
         menuBtn = (Button) findViewById(R.id.systemMenu);
         listview = (RecyclerView) findViewById(R.id.systemListview);
         backBtn = (ImageView)findViewById(R.id.systemBackBtn);
+        btnLogout = findViewById(R.id.btnLogout);
+
+        btnLogout.setOnClickListener(v->{
+            new Preferences().setRememberMe(false, this);
+            finishAffinity();
+            startActivity(new Intent(this, MainActivity.class));
+        });
 
         okBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,8 +56,7 @@ public class SystemActivity extends AppCompatActivity {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(SystemActivity.this, MainActivity.class);
-                startActivity(i);
+                finish();
             }
         });
 
