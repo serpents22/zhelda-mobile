@@ -139,6 +139,10 @@ public class IndiviAcitivity extends AppCompatActivity {
                                 stateimage.setImageResource(R.drawable.snow);
                                 indiviSwitch.setChecked(false);
                             }
+
+                            indiviSettingBtn.setOnClickListener(v->{
+                                startActivity(new Intent(IndiviAcitivity.this, DeviceConfigActivity.class).putExtra("device_id", getIntent().getStringExtra("device_id")).putExtra("title", getIntent().getStringExtra("title")));
+                            });
                         }
 
                         /*if(!response.body().getChronaForceData().isEmpty()){

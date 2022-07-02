@@ -28,6 +28,9 @@ public class IndiviDataResponse {
 	@SerializedName("is_chrono")
 	private boolean isChrono;
 
+	@SerializedName("polling_time")
+	private int pollingTime;
+
 	public String getDeviceId(){
 		return deviceId;
 	}
@@ -50,6 +53,10 @@ public class IndiviDataResponse {
 
 	public int getId(){
 		return id;
+	}
+
+	public int getPollingTime(){
+		return pollingTime;
 	}
 
 	public boolean isIsHeater(){

@@ -42,6 +42,7 @@
         <activity android:name=".NuovoActivity"/>
         <activity android:name=".RegisterDeviceActivity"/>
         <activity android:name=".SetupDayNightActivity"/>
+        <activity android:name=".DeviceConfigActivity"/>
     </application>
 
 </manifest>
