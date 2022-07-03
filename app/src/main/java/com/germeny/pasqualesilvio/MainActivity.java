@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         if(new Preferences().getRememberMe(this)){
             startActivity(new Intent(this, SystemActivity.class));
+            finish();
         }
         else {
             setContentView(R.layout.activity_main);
@@ -72,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
 
                                 Intent intent = new Intent(MainActivity.this, SystemActivity.class);
                                 startActivity(intent);
+                                finish();
                             } else {
                                 Toast.makeText(MainActivity.this, "Failed " + response.body().getStatus() + " : " + response.body().getMessage(), Toast.LENGTH_SHORT).show();
                             }

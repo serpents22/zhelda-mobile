@@ -76,8 +76,10 @@
                     <com.github.angads25.toggle.widget.LabeledSwitch
                         android:layout_gravity="center"
                         android:id="@+id/swSystem"
-                        android:layout_width="100dp"
+                        android:layout_width="120dp"
                         android:layout_height="40dp"
+                        app:colorOn="@color/truecolor"
+                        app:colorBorder="@color/falsecolor"
                         android:textSize="14sp"
                         app:on="false" />
                 </androidx.appcompat.widget.LinearLayoutCompat>
@@ -102,7 +104,11 @@
                     <com.github.angads25.toggle.widget.LabeledSwitch
                         android:layout_gravity="center"
                         android:id="@+id/swSector"
-                        android:layout_width="100dp"
+                        app:textOn="2 Settore"
+                        app:textOff="1 Settore"
+                        app:colorOn="@color/blue"
+                        app:colorBorder="@color/blue"
+                        android:layout_width="120dp"
                         android:layout_height="40dp"
                         android:textSize="14sp"
                         app:on="false" />
@@ -128,8 +134,10 @@
                     <com.github.angads25.toggle.widget.LabeledSwitch
                         android:layout_gravity="center"
                         android:id="@+id/swChrono"
-                        android:layout_width="100dp"
+                        android:layout_width="120dp"
                         android:layout_height="40dp"
+                        app:colorOn="@color/truecolor"
+                        app:colorBorder="@color/falsecolor"
                         android:textSize="14sp"
                         app:on="false" />
                 </androidx.appcompat.widget.LinearLayoutCompat>
